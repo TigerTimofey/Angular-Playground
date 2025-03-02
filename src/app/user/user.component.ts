@@ -1,7 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
-import { DUMMY_USERS } from '../fake-db/dummy-users';
-
-const randromIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -11,15 +8,11 @@ const randromIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  selectedUser = signal(DUMMY_USERS[randromIndex]);
+  @Input() avatar!: string;
+  @Input() name!: string;
 
-  imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar);
-  // get imagePath() {
-  //   return 'assets/users/' + this.selectedUser.avatar;
-  // }
-
-  onSelectUser() {
-    const randromIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser.set(DUMMY_USERS[randromIndex]);
+  get ImagePath() {
+    return 'assets/users/' + this.avatar;
   }
+  onSelectUser() {}
 }
